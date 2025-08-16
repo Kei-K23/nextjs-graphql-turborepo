@@ -7,18 +7,16 @@ import {
 } from 'class-validator';
 
 @InputType()
-export class CreateUserDto {
+export class RegisterDto {
   @IsString()
   @IsNotEmpty()
   @Field(() => String)
   username: string;
 
   @IsString()
-  @IsNotEmpty()
   @Field(() => String, { nullable: true })
   displayName?: string;
 
-  @IsString()
   @IsEmail()
   @IsNotEmpty()
   @Field(() => String)

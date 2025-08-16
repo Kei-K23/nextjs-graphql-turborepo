@@ -1,11 +1,16 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { RefreshToken } from 'src/auth/models/refresh-token.model';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 @Entity({ name: 'users' })
 @ObjectType({ description: 'User' })
@@ -27,7 +32,6 @@ export class User {
   email: string;
 
   @Column()
-  @Field(() => String)
   password: string;
 
   @CreateDateColumn()
@@ -35,4 +39,12 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    if (this.password) {
+      this.password = await bcrypt.hash(this.password, 12);
+    }
+  }
 }

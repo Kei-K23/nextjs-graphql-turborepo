@@ -8,30 +8,47 @@ type User {
   username: String!
   displayName: String
   email: String!
-  password: String!
+}
+
+type TokenResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
 }
 
 type Query {
   users: [User!]!
   user(id: Float!): User!
+  profile: User!
 }
 
 type Mutation {
-  createUser(createUserDto: CreateUserDto!): User!
-  updateUser(id: Float!, updateUserDto: UpdateUserDto!): User!
-  deleteUser(id: Float!): Boolean!
+  register(registerDto: RegisterDto!): TokenResponse!
+  login(loginDto: LoginDto!): TokenResponse!
+  refreshToken(refreshTokenDto: RefreshTokenDto!): TokenResponse!
+  logout(refreshToken: String!): Boolean!
+  updateProfile(updateUserDto: UpdateAuthUserProfileDto!): User!
+  deleteProfile: Boolean!
 }
 
-input CreateUserDto {
+input RegisterDto {
   username: String!
   displayName: String
   email: String!
   password: String!
 }
 
-input UpdateUserDto {
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+input RefreshTokenDto {
+  refreshToken: String!
+}
+
+input UpdateAuthUserProfileDto {
   username: String
   displayName: String
   email: String
-  password: String
 }
