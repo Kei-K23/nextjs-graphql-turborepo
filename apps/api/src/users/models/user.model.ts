@@ -1,12 +1,10 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { RefreshToken } from 'src/auth/models/refresh-token.model';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
