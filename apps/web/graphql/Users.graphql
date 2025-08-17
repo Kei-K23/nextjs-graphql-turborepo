@@ -1,7 +1,10 @@
 query Users{
-    users {
+    users{
         id
         username
+        displayName
         email
-    }
+        createdAt
+        updatedAt
+  }
 }

@@ -14,8 +14,8 @@ export class RegisterDto {
   username: string;
 
   @IsString()
-  @Field(() => String, { nullable: true })
-  displayName?: string;
+  @Field(() => String, { nullable: true, defaultValue: '' })
+  displayName?: string = '';
 
   @IsEmail()
   @IsNotEmpty()

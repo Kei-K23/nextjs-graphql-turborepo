@@ -21,8 +21,8 @@ export class User {
   @Field(() => String)
   username: string;
 
-  @Column({ nullable: true })
-  @Field(() => String, { nullable: true })
+  @Column({ nullable: true, default: '' })
+  @Field(() => String, { nullable: true, defaultValue: '' })
   displayName?: string;
 
   @Column({ unique: true })
@@ -32,9 +32,11 @@ export class User {
   @Column()
   password: string;
 
+  @Field(() => Date)
   @CreateDateColumn()
   createdAt: Date;
 
+  @Field(() => Date)
   @UpdateDateColumn()
   updatedAt: Date;
 
